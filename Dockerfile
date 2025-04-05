@@ -1,7 +1,7 @@
-# Usa una imagen oficial de Node.js (elige la versión que necesites, por ejemplo, v18)
-FROM node:18-alpine
+# Usa una imagen base de Node.js con Debian Buster, que incluye apt-get
+FROM node:18-buster
 
-# Establece el directorio de trabajo dentro del contenedor
+# Establece el directorio de trabajo en /app
 WORKDIR /app
 
 # Instala las dependencias del sistema necesarias para la conversión de imágenes
@@ -11,23 +11,17 @@ RUN apt-get update && apt-get install -y \
   imagemagick \
   && rm -rf /var/lib/apt/lists/*
 
-# Copia los archivos de configuración de tu proyecto
-COPY package.json pnpm-lock.yaml ./
+# Copia los archivos de tu aplicación al contenedor
+COPY package*.json ./
 
-# Instala pnpm globalmente
-RUN npm install -g pnpm
-
-# Instala las dependencias del proyecto usando pnpm
-RUN pnpm install 
+# Instala las dependencias de Node.js
+RUN npm install --production
 
 # Copia el resto del código de la aplicación
 COPY . .
 
-# Construye la aplicación
-RUN pnpm build
-
-# Expón el puerto que usa tu aplicación
+# Expone el puerto en el que se ejecutará la aplicación
 EXPOSE 3000
 
-# Define el comando para ejecutar la aplicación
-CMD ["pnpm", "start"]
+# Comando para iniciar la aplicación
+CMD ["node", "dist/server.js"]
