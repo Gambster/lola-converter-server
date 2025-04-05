@@ -1,0 +1,38 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Configuración de IDEs
+.vscode/
+.idea/
+
+# Entornos
+.env
+.env.local
+.env.*.local
+
+# Archivos de compilación
+dist/
+build/
+tmp/
+temp/
+
+# Dependencias de desarrollo
+coverage/
+*.lcov
+
+# Archivos específicos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos específicos de la plataforma
+*.swp
+*.swo
