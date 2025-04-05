@@ -2,20 +2,26 @@
   "name": "lola-converter-server",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.js",
-  "type": "module",
+  "main": "dist/server.js",
   "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
     "dev": "tsx watch ./src/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^22.14.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/multer": "^1.4.12",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
-    "multer": "1.4.5-lts.2",
+    "multer": "1.4.5-lts.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }

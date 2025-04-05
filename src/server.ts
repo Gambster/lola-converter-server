@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import multer from "multer";
 import { spawn } from "child_process";
 import path from "path";
@@ -18,8 +18,12 @@ app.use(
 
 const upload = multer({ dest: "uploads/" });
 
-app.post("/convert", upload.single("file"), (req, res) => {
-  const inputPath = req.file.path;
+app.post("/convert", upload.single("file"), (req: any, res: any) => {
+  const inputPath = req?.file?.path;
+
+  if (!inputPath) {
+    return res.status(400).send("No se ha subido ningún archivo");
+  }
 
   const dcraw = spawn("dcraw", ["-c", inputPath]);
   const convert = spawn("convert", ["-", "jpg:-"]);
