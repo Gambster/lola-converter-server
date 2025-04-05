@@ -4,6 +4,13 @@ FROM node:18-alpine
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
+# Instala las dependencias del sistema necesarias para la conversión de imágenes
+RUN apt-get update && apt-get install -y \
+  dcraw \
+  ufraw \
+  imagemagick \
+  && rm -rf /var/lib/apt/lists/*
+
 # Copia los archivos de configuración de tu proyecto
 COPY package.json pnpm-lock.yaml ./
 
